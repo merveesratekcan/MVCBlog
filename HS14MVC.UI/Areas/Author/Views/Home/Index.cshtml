@@ -1,0 +1,41 @@
+﻿@model IEnumerable<HS14MVC.UI.Areas.Author.Models.ArticleVMs.ArticleListVM>
+
+@{
+    ViewData["Title"] = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="masthead" style="background-image: url('/assets/img/1571814325707.jpg'); height: 33vh; display: flex; align-items: center; justify-content: center; text-align: center; color: black;">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>@User.Identity.Name</h1>
+                    <span class="subheading">Profile</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container mt-4">
+    <h2 class="display-4">My Articles</h2>
+    <div class="row">
+        @foreach (var article in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="@($"data:image/png;base64,{Convert.ToBase64String(article.Image)}")" alt="Article Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => article.Title)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => article.AuthorLastName)</p>
+                        <a href="@Url.Action("Update", "Article", new { id = article.Id })" class="btn btn-primary">Edit Article</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/scripts.js"></script>

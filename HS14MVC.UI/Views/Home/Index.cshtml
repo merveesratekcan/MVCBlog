@@ -1,0 +1,143 @@
+﻿@model IEnumerable<HS14MVC.UI.Models.GuestArticleListVM>
+
+@{
+    ViewData["Title"] = "HS14-Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-read {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: black;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 50px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-read:hover {
+        background-color: grey;
+        color: white;
+    }
+
+   
+</style>
+
+<header class="masthead" style="background-image: url('assets/img/about-bg.jpg'); height: 33vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white;">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1 style="font-size:5rem;">HS14-Blog</h1>
+                    <span class="subheading" style="font-size: 1.5rem;"> Blog</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            @foreach (var item in Model)
+            {
+                <div class="post-preview">
+                    <a href="@Url.Action("Read", "Home", new { id = item.Id })" style="text-decoration: none;">
+                        <h2 class="post-title" style="color: black;">@Html.DisplayFor(modelItem => item.Title)</h2>
+                    </a>
+                    @if (item.Image != null)
+                    {
+                        <img class="img-fluid" src="@($"data:image/png;base64,{Convert.ToBase64String(item.Image)}")" alt="Article Image" style="max-height: 150px; width: auto; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <p style="color: black; font-weight: bold;">No Image Available</p>
+                    }
+                    <p class="post-meta">Posted by @Html.DisplayFor(modelItem => item.AuthorFirstName) @Html.DisplayFor(modelItem => item.AuthorLastName) on @item.CreadtedDate.ToString("MMMM dd, yyyy")</p>
+                    <a href="@Url.Action("Read", "Home", new { id = item.Id })" class="btn-read">Read</a>
+                </div>
+                <hr class="my-4" />
+            }
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JS-->
+<script src="~/https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="~/js/scripts.js"></script>
+
+@* @model IEnumerable<HS14MVC.UI.Models.GuestArticleListVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                Author Full Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReadTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreadtedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @if (item.Image is null)
+                    {
+                        <p style="color:red; font-weight:bold; ">Resim Yok</p>
+                    }
+                    else
+                    {
+                        <img style="height: 50px; width: auto; object-fit: cover" src="@($"data:image/png;base64,{Convert.ToBase64String(item.Image)}")" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorFirstName) @Html.DisplayFor(modelItem => item.AuthorLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReadTime) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ViewCount) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreadtedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Read", "Read", new {  id=item.Id})
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ *@

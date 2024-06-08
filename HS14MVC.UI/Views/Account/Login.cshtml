@@ -1,0 +1,105 @@
+﻿@model HS14MVC.UI.Models.LoginVm
+
+@{
+    ViewData["Title"] = "Login";
+   
+}
+<style>
+    .masthead {
+        background-image: url('/assets/img/post-bg.jpg'); /* Arka plan resmini ayarlayın */
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: black;
+    }
+
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.8); /* Yarı şeffaf beyaz arka plan */
+        padding: 30px;
+        border-radius: 15px; /* Köşeleri yuvarlak */
+        width: 340px; /* Genişlik */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Gölge */
+    }
+
+    .form-control {
+        margin-bottom: 10px; /* Form elemanları arası boşluk */
+        padding: 10px;
+        border-radius: 5px; /* Form elemanlarının köşeleri yuvarlak */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Buton rengi */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px; /* Buton köşeleri yuvarlak */
+        width: 100%; /* Buton genişliği */
+        color: black;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+</style>
+<div class="masthead">
+    <div class="form-container">
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <h2>Sign In</h2>
+            <input type="text" name="email" placeholder="Email" class="form-control" required>
+            <input type="password" name="password" placeholder="Password" class="form-control" required>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember Me</label>
+            </div>
+            <button type="submit" class="btn-primary">Login</button>
+            
+            <p class="signup-link">Need an account? <a asp-controller="Account" asp-action="Register">Sign up</a></p>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+
+@* @model HS14MVC.UI.Models.LoginVm
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" type="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} *@

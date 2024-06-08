@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<HS14MVC.UI.Areas.Author.Models.ArticleVMs.ArticleListVM>
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Articles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string userName = UserManager.GetUserAsync(User).Result.UserName;
+}
+
+<style>
+    .table {
+        width: 100%;
+        background-color: #f0f0f0; /* Light grey background */
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f9f9f9; /* Very light grey for header */
+        font-weight: bold; /* Bold font style */
+        font-size: 1.2em;
+    }
+
+    .btn-custom {
+        padding: 8px 15px;
+        text-decoration: none;
+        color: black;
+        background-color: white;
+        border: 2px solid #ccc; /* Grey border */
+        border-radius: 5px;
+        display: inline-block;
+        width: calc(50% - 10px); /* Equal width, accounting for margin */
+    }
+
+    .btn-delete {
+        border-color: red;
+    }
+
+        .btn-delete:hover {
+            background-color: red;
+            color: white;
+        }
+
+    .btn-custom:hover {
+        background-color: #ccc; /* Darker grey on hover */
+    }
+
+    .row-highlight {
+        background-color: #e9e9e9; /* Slightly darker grey for rows */
+    }
+
+    .img-preview {
+        height: 50px;
+        width: auto;
+        object-fit: cover;
+    }
+</style>
+
+<h1>@userName's Articles</h1>
+<p>
+    <a asp-action="Create" class="btn-custom" style="width: 100%;">Create New Article</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Author Full Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="row-highlight">
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>
+                    @if (item.Image is null)
+                    {
+                        <p style="color:red; font-weight:bold;">No Image</p>
+                    }
+                    else
+                    {
+                        <img class="img-preview" src="@($"data:image/png;base64,{Convert.ToBase64String(item.Image)}")" />
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.AuthorFirstName) @Html.DisplayFor(modelItem => item.AuthorLastName)</td>
+                <td>
+                    <a href="@Url.Action("Update", new { id = item.Id })" class="btn-custom">Update</a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn-custom btn-delete">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

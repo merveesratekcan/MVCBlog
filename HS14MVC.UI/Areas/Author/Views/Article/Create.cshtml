@@ -1,0 +1,48 @@
+﻿
+
+@model HS14MVC.UI.Areas.Author.Models.ArticleVMs.ArticleCreateVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="font-size:24px; color: blue; font-weight: bold; margin-bottom:20px;">Create Article</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NewImage" class="control-label" style="font-weight:bold;">Image</label>
+                <input type="file" asp-for="NewImage" class="form-control" style="border-radius:5px;" />
+                <span asp-validation-for="NewImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label" style="font-weight:bold;">Title</label>
+                <input asp-for="Title" class="form-control" style="border-radius:5px;" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label" style="font-weight:bold;">Content</label>
+                <textarea asp-for="Content" class="form-control" style="height:200px; border-radius:5px;"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subjects" class="control-label" style="font-weight:bold;">Subjects</label>
+                <select asp-for="SubjectId" asp-items="@Model.Subjects" class="form-control" style="border-radius:5px;">
+                    <option>---Select---</option>
+                </select>
+                <span asp-validation-for="Subjects" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" style="width:100%; border-radius:5px;" />
+            </div>
+        </form>
+        <br />
+        <br />
+
+    <a asp-action="Index" class="btn btn-outline-primary" style="width:100%; background-color:white; border-color:black; color:black; border-radius:5px; font-weight:bold;" onmouseover="this.style.backgroundColor='grey'; this.style.color='white';" onmouseout="this.style.backgroundColor='white'; this.style.color='black';">
+        Back to List
+    </a>
+

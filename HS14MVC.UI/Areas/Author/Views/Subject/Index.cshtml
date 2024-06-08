@@ -1,0 +1,97 @@
+﻿@model IEnumerable<HS14MVC.UI.Areas.Author.Models.SubjectVMs.SubjectListVM>
+
+@{
+    ViewData["Title"] = "Subjects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int row = 0;
+}
+
+<style>
+    .table {
+        width: 100%;
+        background-color: white; /* Background is set to white */
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f9f9f9; /* Very light grey for header */
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    td:nth-child(1) { /* Number column styling */
+        font-weight: bold;
+        font-size: 1.5em; /* Larger font size */
+    }
+
+    .btn-custom {
+        padding: 8px 15px;
+        margin: 0 5px; /* Spacing between buttons */
+        text-decoration: none;
+        color: black;
+        background-color: white;
+        border: 2px solid #ccc; /* Grey border */
+        border-radius: 5px;
+        display: inline-block;
+        width: calc(50% - 10px); /* Equal width, accounting for margin */
+        transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+    .btn-update {
+        border-color: #007bff; /* Blue border for update button */
+    }
+
+        .btn-update:hover,
+        .btn-delete:hover {
+            background-color: #007bff; /* Blue background on hover */
+            color: white; /* White text on hover */
+            border-color: #0056b3; /* Darker blue border on hover */
+        }
+
+    .btn-delete {
+        border-color: red;
+    }
+
+        .btn-delete:hover {
+            background-color: red; /* Red background on hover */
+            border-color: darkred; /* Darker red border on hover */
+        }
+
+    .row-highlight {
+        background-color: #e9e9e9; /* Slightly darker grey for rows */
+    }
+</style>
+
+<h1>Subjects</h1>
+<p>
+    <a href="@Url.Action("Create")" class="btn-custom btn-update " style="width: 100%;">Create New Subject</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            row++;
+            <tr class="row-highlight">
+                <td>@row.</td> <!-- Changed ; to . -->
+                <td style="font-weight: bold;">@Html.DisplayFor(modelItem => item.Name)</td> <!-- Bold font for names -->
+                <td>
+                    <a href="@Url.Action("Update", new { id = item.Id })" class="btn-custom btn-update">Update</a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn-custom btn-delete">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

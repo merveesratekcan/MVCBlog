@@ -1,0 +1,38 @@
+﻿@model IEnumerable<HS14MVC.UI.Models.GuestArticleListVM>
+
+@{
+    ViewData["Title"] = "Top 5 Articles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h1 class="display-4">Top 5 Articles</h1>
+    @if (Model.Any())
+    {
+        var featuredArticle = Model.First();
+        <div class="row featured-article">
+            <div class="col-md-12">
+                <img src="@($"data:image/png;base64,{Convert.ToBase64String(featuredArticle.Image)}")" class="img-fluid" alt="Featured Article" style="width:100%; height:auto;">
+                <h2>@Html.DisplayFor(modelItem => featuredArticle.Title)</h2>
+                <p>@Html.DisplayFor(modelItem => featuredArticle.AuthorFirstName) @Html.DisplayFor(modelItem => featuredArticle.AuthorLastName)</p>
+                <p><strong>Read Time:</strong> @Html.DisplayFor(modelItem => featuredArticle.ReadTime) minutes</p>
+                <a class="btn btn-primary" href="@Url.Action("Read", "Home", new { id = featuredArticle.Id })">Read More</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            @foreach (var article in Model.Skip(1))
+            {
+                <div class="col-md-4">
+                    <img src="@($"data:image/png;base64,{Convert.ToBase64String(article.Image)}")" class="img-thumbnail" alt="Article Image">
+                    <h4>@Html.DisplayFor(modelItem => article.Title)</h4>
+                    <p>@Html.DisplayFor(modelItem => article.AuthorFirstName) @Html.DisplayFor(modelItem => article.AuthorLastName)</p>
+                    <a class="btn btn-secondary" href="@Url.Action("Read", "Home", new { id = article.Id })">Read More</a>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No articles found.</p>
+    }
+</div>

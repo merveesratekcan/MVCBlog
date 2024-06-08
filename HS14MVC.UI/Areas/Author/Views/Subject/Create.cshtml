@@ -1,0 +1,31 @@
+﻿
+@model HS14MVC.UI.Areas.Author.Models.SubjectVMs.SubjectCreateVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="font-size:24px; color: blue; font-weight: bold; margin-bottom:20px;">Create Subject</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label" style="font-weight:bold;">Name</label>
+                <input asp-for="Name" class="form-control" style="border-radius:5px;" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" style="width:100%; border-radius:5px;" />
+            </div>
+        </form>
+        <br />
+        <br />
+
+
+    <a asp-action="Index" class="btn btn-outline-primary" style="width:100%; background-color:white; border-color:black; color:black; border-radius:5px; font-weight:bold;" onmouseover="this.style.backgroundColor='grey'; this.style.color='white';" onmouseout="this.style.backgroundColor='white'; this.style.color='black';">
+        Back to List
+    </a>
+

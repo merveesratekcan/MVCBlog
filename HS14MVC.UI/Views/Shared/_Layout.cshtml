@@ -1,0 +1,300 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - HS14MVC.UI</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/HS14MVC.UI.styles.css" asp-append-version="true" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Clean Blog - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+    <link href="~/https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="~/https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+      <link href="~/css/styles.css" rel="stylesheet" />
+    <style >
+        .custom-btn-home {
+            font-weight: bold;
+            background-color: transparent;
+            border-radius: 20px;
+        }
+
+        .custom-btn-dark-blue {
+            color: #003366; /* Dark blue */
+            font-weight: bold;
+            border: 2px solid transparent;
+            border-radius: 20px;
+        }
+
+            .custom-btn-dark-blue:hover {
+                background-color: rgba(0, 51, 102, 0.1); /* Light transparent dark blue */
+                border-color: #003366;
+            }
+
+        .custom-btn-light-blue {
+            color: #007bff; /* Lighter blue */
+            font-weight: bold;
+            border: 2px solid transparent;
+            border-radius: 20px;
+        }
+
+            .custom-btn-light-blue:hover {
+                background-color: rgba(0, 123, 255, 0.1); /* Light transparent blue */
+                border-color: #007bff;
+            }
+
+        .custom-btn-black {
+            color: #000000; /* Black */
+            font-weight: bold;
+            background-color: transparent;
+            border-radius: 20px;
+        }
+
+            .custom-btn-black:hover {
+                background-color: rgba(0, 0, 0, 0.1); /* Light transparent black */
+            }
+
+        .custom-btn-grey {
+            color: #007bff; /* Mavi yazı */
+            background-color: #f8f9fa; /* Açık gri arkaplan */
+            padding: 8px 15px;
+            border-radius: 20px; /* Yuvarlak kenarlar */
+            font-weight: bold; /* Kalın yazı */
+            border: 2px solid #007bff; /* Mavi çerçeve */
+            display: inline-block; /* Hizalamayı düzeltmek için ekran tipi */
+            transition: background-color 0.3s, color 0.3s; /* Fare imleci efektleri için pürüzsüz geçiş */
+        }
+
+            .custom-btn-grey:hover {
+                background-color: #007bff; /* Fare imleci üzerine gelince mavi arkaplan */
+                color: #ffffff; /* Fare imleci üzerine gelince beyaz yazı */
+            }
+        </style>
+  
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HS-14 BLOG</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark custom-btn-home" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark custom-btn-home" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link custom-btn-dark-blue" asp-area="" asp-controller="Home" asp-action="IndexTop5">Article Top 5</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link custom-btn-light-blue" asp-area="" asp-controller="Home" asp-action="GetSubjects">Subjects</a>
+                        </li>
+                    </ul>
+                   
+                    @if (User.IsInRole("Author"))
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link custom-btn-grey" asp-area="Author" asp-controller="Subject" asp-action="Index">Add Subject</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link custom-btn-grey" asp-area="Author" asp-controller="Article" asp-action="Index">Add Article</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link custom-btn-grey" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link custom-btn-grey" asp-area="Author" asp-controller="Home" asp-action="Index">Profile</a>
+                            </li>
+                        </ul>
+                    }
+                     else{
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                <a class="nav-link custom-btn-grey" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                <a class="nav-link custom-btn-grey" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                </li>
+                            </ul>
+                    }
+
+                    
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-6 my-1">
+                    <a class="btn btn-dark btn-social mx-2" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://github.com/"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="col-6 my-1">
+                    &copy; Your Website 2024 <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("Notyf");
+    @await RenderSectionAsync("Scripts", required: false)
+    
+</body>
+</html>
+
+
+@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HS14MVC.UI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HS14MVC.UI.styles.css" asp-append-version="true" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Clean Blog - Start Bootstrap Theme</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HS14MVC.UI</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>                        
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="IndexTop5">Article Top 5</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GetSubjects">Subjects</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        </li>
+                    </ul>
+
+                    @if (User.IsInRole("Author"))
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Author" asp-controller="Subject" asp-action="Index">Subject</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Author" asp-controller="Article" asp-action="Index">Article</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-6 my-1">
+                    <a class="btn btn-dark btn-social mx-2" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://github.com/"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="col-6 my-1">
+                    &copy; Your Website 2024 <a href="Privacy">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("Notyf");
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html> *@
